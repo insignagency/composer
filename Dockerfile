@@ -1,4 +1,4 @@
-FROM php:7.2-cli-alpine
+FROM php:7.3-cli-alpine
 
 RUN docker-php-ext-install pdo_mysql && \
     apk add --no-cache make mysql-client gcc autoconf freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
