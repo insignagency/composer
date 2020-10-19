@@ -1,7 +1,8 @@
 FROM php:7.2-cli-alpine
 
 RUN docker-php-ext-install pdo_mysql && \
-    apk add --no-cache bash make mysql-client openssh-client gcc autoconf freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
+    apk add --no-cache bash make mysql-client openssh-client rsync \
+    gcc autoconf freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
     docker-php-ext-configure gd \
     --with-gd --with-freetype-dir=/usr/include/ \
     --with-png-dir=/usr/include/ \
