@@ -1,12 +1,15 @@
 FROM php:7.4-cli-alpine
 
 RUN docker-php-ext-install pdo_mysql && \
-    apk add --no-cache bash make mysql-client openssh-client gcc autoconf libzip-dev freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
+    apk add --no-cache bash make mysql-client openssh-client gcc g++ autoconf imagemagick-dev imagemagick libzip-dev freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
     docker-php-ext-configure gd \
     --with-freetype=/usr/include/ \
     --with-jpeg=/usr/include/ && \
     NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
     docker-php-ext-install -j${NPROC} gd && \
+    docker-php-ext-install zip && \
+    pecl install imagick && \
+    docker-php-ext-enable imagick && \
     apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev make gcc && \
     docker-php-ext-install zip
 
