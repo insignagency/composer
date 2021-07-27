@@ -20,4 +20,6 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer && \
     # Make sure we're installing what we think we're installing!
     php -r "if (hash_file('sha384', '/tmp/composer-setup.php') !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }" && \
     php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot && \
-    rm -f /tmp/composer-setup.*
+    rm -f /tmp/composer-setup.* && \
+    composer require smile/gdpr-dump && \
+    ln -s /vendor/smile/gdpr-dump/bin/gdpr-dump /usr/local/bin/gdpr-dump
